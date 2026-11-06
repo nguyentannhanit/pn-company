@@ -1,0 +1,21 @@
+{
+  "name": "@pn/worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N Worker — chạy agent run trong sandbox, nhận việc qua BullMQ (spec §18, §23)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@pn/shared": "*",
+    "@pn/events": "*",
+    "@pn/database": "*",
+    "@pn/sandbox": "*",
+    "@pn/github": "*",
+    "@pn/agents": "*",
+    "@pn/orchestrator": "*"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@pn/database",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N PostgreSQL schema, migrations and data access (spec §14, §130)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@pn/shared": "*",
+    "pg": "^8.13.1",
+    "@pn/secrets": "*"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.10"
+  }
+}

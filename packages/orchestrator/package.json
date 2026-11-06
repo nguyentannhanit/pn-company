@@ -1,0 +1,25 @@
+{
+  "name": "@pn/orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N CTO orchestration engine and workflow (spec \u00a73.1, \u00a74)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@pn/agents": "*",
+    "@pn/database": "*",
+    "@pn/events": "*",
+    "@pn/github": "*",
+    "@pn/sandbox": "*",
+    "@pn/shared": "*",
+    "bullmq": "^6.3.1",
+    "@pn/permissions": "*"
+  }
+}

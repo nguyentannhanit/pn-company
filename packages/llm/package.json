@@ -1,0 +1,19 @@
+{
+  "name": "@pn/llm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N LLM provider abstraction, model catalog, router and fallback (spec §15, §45, §51-53)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@pn/shared": "*",
+    "@anthropic-ai/sdk": "^0.121.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@pn/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N API: REST, AI Gateway, WebSocket, API Center (spec §88, §90)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "node --watch --experimental-strip-types src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@pn/shared": "*",
+    "@pn/events": "*",
+    "@pn/database": "*",
+    "@pn/llm": "*",
+    "@pn/permissions": "*",
+    "@pn/secrets": "*",
+    "@pn/sandbox": "*",
+    "@pn/github": "*",
+    "fastify": "^5.12.1",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/websocket": "^11.3.0",
+    "@fastify/jwt": "^10.2.2",
+    "@fastify/rate-limit": "^11.2.0",
+    "zod": "^3.24.1",
+    "@pn/agents": "*",
+    "fastify-plugin": "^5.0.1",
+    "@pn/orchestrator": "*"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.13"
+  }
+}

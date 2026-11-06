@@ -1,0 +1,18 @@
+{
+  "name": "@pn/github",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N GitHub integration — branch, commit, pull request (spec §17, §59, §60)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@pn/shared": "*"
+  }
+}

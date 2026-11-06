@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../shared"
+    },
+    {
+      "path": "../agents"
+    },
+    {
+      "path": "../events"
+    },
+    {
+      "path": "../database"
+    },
+    {
+      "path": "../sandbox"
+    },
+    {
+      "path": "../github"
+    },
+    {
+      "path": "../permissions"
+    }
+  ]
+}

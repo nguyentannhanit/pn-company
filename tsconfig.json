@@ -1,0 +1,47 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/shared"
+    },
+    {
+      "path": "packages/events"
+    },
+    {
+      "path": "packages/permissions"
+    },
+    {
+      "path": "packages/knowledge"
+    },
+    {
+      "path": "packages/llm"
+    },
+    {
+      "path": "packages/database"
+    },
+    {
+      "path": "packages/secrets"
+    },
+    {
+      "path": "packages/sandbox"
+    },
+    {
+      "path": "packages/github"
+    },
+    {
+      "path": "packages/agents"
+    },
+    {
+      "path": "packages/orchestrator"
+    },
+    {
+      "path": "apps/api"
+    },
+    {
+      "path": "apps/telegram-bot"
+    },
+    {
+      "path": "apps/worker"
+    }
+  ]
+}

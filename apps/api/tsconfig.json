@@ -1,0 +1,46 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../../packages/shared"
+    },
+    {
+      "path": "../../packages/events"
+    },
+    {
+      "path": "../../packages/database"
+    },
+    {
+      "path": "../../packages/llm"
+    },
+    {
+      "path": "../../packages/permissions"
+    },
+    {
+      "path": "../../packages/secrets"
+    },
+    {
+      "path": "../../packages/sandbox"
+    },
+    {
+      "path": "../../packages/github"
+    },
+    {
+      "path": "../../packages/agents"
+    },
+    {
+      "path": "../../packages/orchestrator"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@pn/telegram-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N Telegram Bot — cổng lệnh, duyệt và nhận file của CEO (spec §5, §57, §58)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "node --watch --experimental-strip-types src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@pn/shared": "*"
+  }
+}

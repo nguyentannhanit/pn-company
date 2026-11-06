@@ -1,0 +1,132 @@
+/*
+ * P&N — Cài đặt → Tài khoản & phân quyền.
+ * Mỗi tài khoản là một "thẻ ra vào" văn phòng: dải màu theo vai trò, lỗ đeo dây ở mép trên, và dải ô "khu được vào"
+ * — đọc là biết người đó chạm được tới đâu mà không cần mở chi tiết. Màu lấy từ token chung nên tự đổi sáng/tối.
+ */
+
+/* ---------- Dải báo đây là bản mẫu ---------- */
+/* Link mời / mật khẩu tạm / link nối bot: hiện một lần, có nút chép. */
+.handoff { display: grid; gap: 8px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--tone-green) 40%, transparent); background: color-mix(in srgb, var(--tone-green) 7%, transparent); padding: 12px 14px; font-size: 14px; }
+.handoff b { color: var(--ink-1); }
+.copyRow { display: flex; gap: 8px; min-width: 0; }
+.copyRow input { flex: 1; min-width: 0; }
+.way:has(input:disabled) { cursor: not-allowed; opacity: .55; }
+
+/* ---------- Bố cục hai cột: thẻ bên trái, bảng tạo/chi tiết bên phải ---------- */
+.main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(360px, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 1100px) { .main { grid-template-columns: 1fr; } }
+/* Cột phải ghim ngay dưới khối tiêu đề + hàng thẻ (chiều cao khối đó do PageHeader đo, ghi vào --pn-pin-h). */
+.side { position: sticky; top: calc(var(--pn-pin-h, 0px) + 16px); }
+@media (max-width: 1100px) { .side { position: static; } }
+
+/* ---------- Thẻ ra vào ---------- */
+.badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; }
+.badge {
+  position: relative; text-align: left; display: grid; gap: 12px; padding: 22px 16px 14px 20px; border-radius: 16px;
+  background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow-panel); cursor: pointer; overflow: hidden;
+  color: var(--ink-1); font: inherit;
+}
+.badge::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--role); }
+/* Lỗ đeo dây: chi tiết nhỏ khiến ô này đọc ra là thẻ nhân viên chứ không phải một ô danh sách. */
+.badge::after { content: ''; position: absolute; top: 8px; left: 50%; width: 34px; height: 6px; margin-left: -17px; border-radius: 99px; background: var(--fill-2); box-shadow: inset 0 1px 2px rgb(0 0 0 / 18%); }
+.badge:hover { border-color: color-mix(in srgb, var(--role) 55%, var(--line)); }
+.badgeSel { border-color: var(--role); box-shadow: var(--shadow-panel), 0 0 0 3px color-mix(in srgb, var(--role) 22%, transparent); }
+.badgeOff { opacity: 0.62; }
+.badgeOff::before { background: repeating-linear-gradient(180deg, var(--tone-gray) 0 6px, transparent 6px 10px); }
+.who { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.avatar { width: 44px; height: 44px; flex: none; border-radius: 12px; display: grid; place-items: center; font-weight: 700; font-size: 16px; color: #fff; background: var(--role); letter-spacing: 0.02em; }
+.avatarBig { width: 52px; height: 52px; font-size: 19px; border-radius: 14px; }
+.name { font-weight: 700; font-size: 15.5px; line-height: 1.3; }
+.mail { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.roleTag { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--role); background: color-mix(in srgb, var(--role) 12%, transparent); border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+.row { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; justify-content: space-between; }
+.meta { font-size: 13px; color: var(--ink-3); }
+
+/* ---------- Dải "khu được vào": 9 ô, đậm dần theo mức quyền ---------- */
+.zones { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; }
+.zone { height: 9px; border-radius: 3px; background: var(--fill-2); }
+.zone[data-lv='1'] { background: color-mix(in srgb, var(--role) 32%, var(--fill-2)); }
+.zone[data-lv='2'] { background: color-mix(in srgb, var(--role) 64%, var(--fill-2)); }
+.zone[data-lv='3'] { background: var(--role); }
+.zonesLabel { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); }
+
+/* ---------- Mức quyền: ba vạch như cột sóng (cùng ngôn ngữ với bậc model ở trang Kết nối AI) ---------- */
+.lv { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.lv i { width: 4px; border-radius: 1.5px; background: var(--fill-2); }
+.lv i:nth-child(1) { height: 6px; }
+.lv i:nth-child(2) { height: 10px; }
+.lv i:nth-child(3) { height: 14px; }
+.lv[data-lv='1'] i:nth-child(-n + 1), .lv[data-lv='2'] i:nth-child(-n + 2), .lv[data-lv='3'] i { background: var(--role, var(--brand-text)); }
+.lvWord { font-size: 13px; font-weight: 600; }
+.lvNone { color: var(--ink-3); font-weight: 500; }
+
+/* ---------- Bảng tạo tài khoản / chi tiết ---------- */
+.panel { padding: 20px; display: grid; gap: 16px; }
+.panelHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.panelHead h2 { font-size: 18px; }
+.label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.label small { font-weight: 400; color: var(--ink-3); font-size: 13px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .pair { grid-template-columns: 1fr; } }
+.stepK { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+
+/* Chọn vai trò: thẻ nhỏ, bấm là đổi cả bảng quyền bên dưới */
+.roles { display: grid; gap: 8px; }
+.roleOpt { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; text-align: left; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink-1); cursor: pointer; font: inherit; }
+.roleOpt:hover { border-color: color-mix(in srgb, var(--role) 60%, var(--line-strong)); }
+.roleOptOn { border-color: var(--role); background: color-mix(in srgb, var(--role) 8%, var(--panel)); box-shadow: inset 3px 0 0 var(--role); }
+.roleOpt b { font-size: 14.5px; }
+.roleOpt span { grid-column: 2 / 4; font-size: 13px; color: var(--ink-3); line-height: 1.4; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--role); }
+.roleOpt .zones { width: 96px; grid-row: 1; grid-column: 3; }
+
+/* Quyền chi tiết: mỗi khu một thanh chọn 4 nấc */
+.perms { display: grid; gap: 6px; }
+.perm { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+.perm:first-child { border-top: 0; }
+.permName { font-size: 14px; font-weight: 600; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.permNote { grid-column: 1 / -1; font-size: 13px; color: var(--ink-3); line-height: 1.45; }
+.sens { font-size: 11.5px; font-weight: 700; color: var(--tone-amber); background: color-mix(in srgb, var(--tone-amber) 13%, transparent); border-radius: 6px; padding: 1px 6px; }
+.edited { font-size: 11.5px; font-weight: 700; color: var(--brand-text); background: color-mix(in srgb, var(--brand-text) 11%, transparent); border-radius: 6px; padding: 1px 6px; }
+.seg { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--line-strong); border-radius: 9px; overflow: hidden; }
+.seg button { border: 0; background: none; padding: 5px 9px; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink-3); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line-strong); }
+.seg button[aria-pressed='true'] { background: var(--role, var(--brand-text)); color: #fff; }
+.seg button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Cách vào lần đầu */
+.ways { display: grid; gap: 8px; }
+.way { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: start; font-size: 14px; cursor: pointer; }
+.way input { margin-top: 3px; accent-color: #5b48e6; width: 16px; height: 16px; }
+.way small { grid-column: 2; color: var(--ink-3); font-size: 13px; }
+
+/* Xem trước: người này sẽ làm được gì */
+.preview { border-radius: 14px; background: var(--fill-1); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 8px; }
+.preview h3 { font-size: 14.5px; }
+.can, .cant { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 14px; }
+.can li, .cant li { display: grid; grid-template-columns: 18px 1fr; gap: 6px; }
+.can li::before { content: '✓'; color: var(--tone-green); font-weight: 800; }
+.cant li { color: var(--ink-3); }
+.cant li::before { content: '✕'; color: var(--tone-red); font-weight: 800; }
+
+/* ---------- Ma trận vai trò × khu ---------- */
+.matrixWrap { overflow-x: auto; }
+.matrix { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; min-width: 760px; }
+.matrix th, .matrix td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.matrix thead th { font-size: 13.5px; color: var(--ink-2); font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+.matrix thead th span { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink-3); }
+.matrix tbody th { font-weight: 600; width: 30%; }
+.matrix tbody th small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12.5px; }
+.cell { display: inline-flex; align-items: center; gap: 7px; }
+.matrix tr:last-child th, .matrix tr:last-child td { border-bottom: 0; }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 10px; }
+.rule { display: grid; gap: 3px; padding: 12px 14px; border-radius: 12px; background: var(--fill-1); font-size: 13.5px; color: var(--ink-2); }
+.rule b { color: var(--ink-1); font-size: 14px; }
+
+/* Quyền chi tiết gập lại */
+.fold { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+.fold > summary { cursor: pointer; list-style: none; display: grid; gap: 2px; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold[open] > summary { margin-bottom: 8px; }
+.foldSum { font-size: 13.5px; color: var(--ink-2); }

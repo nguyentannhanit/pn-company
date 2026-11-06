@@ -1,0 +1,19 @@
+{
+  "name": "@pn/events",
+  "version": "0.1.0",
+  "private": true,
+  "description": "P&N event contract and event bus (spec §21, §22, §129)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@pn/shared": "*",
+    "ioredis": "^6.0.0"
+  }
+}

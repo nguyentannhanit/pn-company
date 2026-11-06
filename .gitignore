@@ -1,0 +1,42 @@
+node_modules/
+dist/
+build/
+.next/
+coverage/
+*.tsbuildinfo
+
+# secrets — NEVER commit (spec §19, §69, §89)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# runtime
+.pn/
+workspaces/
+logs/
+*.log
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Bo cai dat dung goi ra, khong theo doi
+dist-install/
+logs/
+
+# Cong cu tai ve tai cho (cloudflared...), trang thai Vercel CLI
+tools/bin/
+.vercel/
+
+# Tep CEO gui qua Telegram (bot tai ve dia)
+storage/
+
+# Cau hinh duong ham co ten cua may nay (tools/tunnel-setup.ps1 tao; chua duong dan khoa cuc bo)
+tools/named-tunnel.yml
+tools/named-tunnel.json
